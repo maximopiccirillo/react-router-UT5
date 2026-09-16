@@ -1,38 +1,21 @@
-import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
-import Header from "./components/Header.jsx";
-import ProductPage from "./pages/ProductsPage.jsx";
-import ProductDetailPage from "./pages/ProductDetailPage.jsx";
-import WelcomePage from "./pages/WelcomePage.jsx";
+import { Routes, Route, Navigate } from 'react-router-dom'
+import CountriesList from './pages/CountriesList'
+import CountryDetail from './pages/CountryDetail'
 
 function App() {
   return (
-    <>
-      <Header />
-      {/* 👇 Here you can use Routes or Switch component, Routes match with the most
-      specific route so the order doesn't matter  */}
+    // Primera parte del ejercicio
+    // el primer route es para que vaya nuevamente a countries cuando apretas el boton de ir para atrás en un pais
+    // el segundo es el que muestra los countries
+    // muestra el pais seleccionado 
+    <div className="app">
       <Routes>
-        {/* you can use 👇 character (* or wildcard) to any other route
-        in combination with the Navigate component you can redirect the user to a default page */}
-        <Route path="/*" element={<Navigate replace to="/welcome" />} />
-
-        {/* You can compose the routes by wrapping the Route components  and using 
-        the Outlet Component from React Router*/}
-        <Route path="/welcome/*" element={<WelcomePage />}>
-          <Route path="new-user" element={<p> Welcome, new user!</p>} />
-          <Route
-            path="to-outlet"
-            element={<p> Welcome, to the outlet! 🛍️</p>}
-          />
-        </Route>
-
-        {/* If composing routes doesn't looks clear for you, you always can define
-        the whole 👇route and expect the router will match the most specific one */}
-        <Route path="/products" element={<ProductPage />} />
-        <Route path="/products/:productId" element={<ProductDetailPage />} />
+        <Route path="/" element={<Navigate to="/countries" replace />} />
+        <Route path="/countries" element={<CountriesList />} />
+        <Route path="/countries/:cca2" element={<CountryDetail />} />
       </Routes>
-    </>
-  );
+    </div>
+  )
 }
 
-export default App;
+export default App
